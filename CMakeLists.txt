@@ -31,9 +31,9 @@ endif()
 ###########################
 # options                 #
 ###########################
-set(INTERNAL_BASE_TAG "30000" CACHE STRING "Base value for internal tags")
-if (NOT INTERNAL_BASE_TAG MATCHES "^[0-9]+$")
-    message(FATAL_ERROR "INTERNAL_BASE_TAG must be a numeric value, but got '${INTERNAL_BASE_TAG}'")
+set(RBC_INTERNAL_BASE_TAG "30000" CACHE STRING "Base value for internal tags")
+if (NOT RBC_INTERNAL_BASE_TAG MATCHES "^[0-9]+$")
+  message(FATAL_ERROR "RBC_INTERNAL_BASE_TAG must be a numeric value, but got '${RBC_INTERNAL_BASE_TAG}'")
 endif()
 
 ########################################################
@@ -115,7 +115,7 @@ file(GLOB RBC_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
 # Build shared library to inherit mpi wrapper from parent targets
 add_library(rbc STATIC ${RBC_SRCS})
 target_link_libraries(rbc tlx MPI::MPI_CXX)
-target_compile_definitions(rbc PUBLIC INTERNAL_BASE_TAG=${INTERNAL_BASE_TAG})
+target_compile_definitions(rbc PUBLIC INTERNAL_BASE_TAG=${RBC_INTERNAL_BASE_TAG})
 
 file(GLOB RBC_INCLUDES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
   include/RBC
